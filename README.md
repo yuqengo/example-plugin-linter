@@ -40,12 +40,23 @@ linters:
   - example
 ```
 4. Alternately, you can leave it disabled and turn it on via command line only: `golangci-lint run -Eexample`
+5. If everything works correctly, you should see the linter show up as enabled by running `golangci-lint linters`. This linter will look for `// TODO: ` in front of functions, so you can also add that to your code and see the errors.
+6. You can also see the linter get loaded with the `-v` option for either `run` or `linters`
 
 ### To Configure Your Own `golang.org/x/tools/go/analysis` Based Linter
 
 Your Linter must implement one or more `analysis.Analyzer` structs.
 Your project should also use `go.mod`. All versions of libraries that overlap `golangci-lint` (including replaced libraries) MUST be set to the same version as `golangci-lint`. You can see the versions by running `go version -m golangci-lint`.
 
+You'll also want to create a go file like `plugin/example.go`. This MUST be in the package `main`, and define:
+1. A variable of type `analyzerPlugin`. The type `analyzerPlugin` can be defined as a string, struct, whatever.
+```
+type analyzerPlugin struct{}
+var AnalyzerPlugin analyzerPlugin
+```
+2. A function with signature `func (*analyzerPlugin) GetLinterName() string`
+3. A function with signature `func (*analyzerPlugin) GetLinterDesc() string`
+4. A function with signature `func (*analyzerPlugin) GetAnalyzers() []*analysis.Analyzer`
 
 \* Sorry, I haven't found a way to enable `go get` functionality for plugins yet. If you know how, let me know!
 
