@@ -10,7 +10,7 @@ To use this:
 
 
 ### Create a Copy of `golangci-lint` that Can Run with Plugins
-(After the PR this will be either the production code or simpler to get hopefully)
+(After the PR this will be either the production code or simpler to get hopefully. For now atleast, you must build this locally because it needs code that hasn't been accepted yet. Additionally, `golangci-lint` is built with the vendors option, which breaks plugins that have overlapping dependencies, so a vendor-free version of the code must be used)
 
 1. Download the `i473` branch of https://github.com/dbraley/golangci-lint/tree/i473
 2. From that projects root directy, run `make vendor_free_build`
@@ -41,6 +41,12 @@ linters:
 ```
 4. Alternately, you can leave it disabled and turn it on via command line only: `golangci-lint run -Eexample`
 
+### To Configure Your Own `golang.org/x/tools/go/analysis` Based Linter
+
+Your Linter must implement one or more `analysis.Analyzer` structs.
+Your project should also use `go.mod`. All versions of libraries that overlap `golangci-lint` (including replaced libraries) MUST be set to the same version as `golangci-lint`. You can see the versions by running `go version -m golangci-lint`.
+
 
 \* Sorry, I haven't found a way to enable `go get` functionality for plugins yet. If you know how, let me know!
+
 \** Alternately, you can use the `-o /path/to/location/example.so` output flag to have it put it there for you.
