@@ -5,7 +5,7 @@ To use this:
 ### Create the Plugin From This Linter
 
 1. Download the code \*
-2. From the root project directory, run `go build -buildmode=plugin -o plugin/example.go`.
+2. From the root project directory, run `go build -buildmode=plugin plugin/example.go`.
 3. Copy the generated `example.so` file into your project or to some other known location of your choosing. \**
 
 
