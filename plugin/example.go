@@ -2,7 +2,7 @@
 package main
 
 import (
-	linters "github.com/dbraley/example-linter"
+	linters "github.com/example-plugin-linter"
 	"golang.org/x/tools/go/analysis"
 )
 

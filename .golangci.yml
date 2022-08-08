@@ -1,0 +1,13 @@
+linters-settings:
+  custom:
+    example:
+      path: ./example.so
+
+#linters:
+#  enable-all: true
+
+##
+linters:
+  disable-all: true
+  enable:
+    - example
